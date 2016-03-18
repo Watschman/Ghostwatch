@@ -1,14 +1,14 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
+  "modid": "Ghostwatch",
+  "name": "Ghostwatch",
+  "description": "Watschmans Ghostwatch Mod for a server project.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
+  "authorList": ["Watschman"],
+  "credits": "to Asiliantv for inspiring this mod",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
