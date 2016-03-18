@@ -56,5 +56,6 @@ MinecraftForge-Credits.txt
 MinecraftForge-License.txt
 README.txt
 Ghostwatch.iws
-\run\*
-\eclipse\*
+run/*
+eclipse/*
+out/*
