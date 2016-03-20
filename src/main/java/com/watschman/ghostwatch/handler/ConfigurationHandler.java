@@ -9,6 +9,8 @@ import net.minecraftforge.common.config.Property;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ConfigurationHandler{
 
@@ -23,7 +25,7 @@ public class ConfigurationHandler{
     }
     private static void loadConfiguration(){
         configReference.configValue = configuration.getBoolean("enabled", Configuration.CATEGORY_GENERAL, false, "defines if this Mod is enabled or not");
-        Property whitelist = configuration.get(Configuration.CATEGORY_GENERAL, "whitelist", new String[]{"watschman"});
+        Property whitelist = configuration.get(Configuration.CATEGORY_GENERAL, "whitelist", new String[]{"Watschman"});
         whitelist.comment = "Add player names to permit building in Survival";
         configReference.whitelist.addAll(Arrays.asList(whitelist.getStringList()));
         if (configuration.hasChanged()){
@@ -33,7 +35,6 @@ public class ConfigurationHandler{
     @SubscribeEvent
     public void onConfigurationChangedEvent (ConfigChangedEvent.OnConfigChangedEvent event){
         if (event.modID.equalsIgnoreCase(Reference.MOD_ID)){
-            //RESYNC
             loadConfiguration();
         }
     }

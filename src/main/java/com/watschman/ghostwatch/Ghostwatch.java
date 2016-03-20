@@ -5,7 +5,7 @@ import com.watschman.ghostwatch.handler.ConfigurationHandler;
 import com.watschman.ghostwatch.proxy.IProxy;
 import com.watschman.ghostwatch.reference.Reference;
 import com.watschman.ghostwatch.reference.configReference;
-import com.watschman.ghostwatch.server.commands.SampleCommand;
+import com.watschman.ghostwatch.server.commands.WhitelistCommand;
 import com.watschman.ghostwatch.utility.LogHelper;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.SidedProxy;
@@ -54,7 +54,7 @@ public class Ghostwatch
     @Mod.EventHandler
     public void serverLoad(FMLServerStartingEvent event)
     {
-        event.registerServerCommand(new SampleCommand());
+        event.registerServerCommand(new WhitelistCommand());
     }
 
     //POSTINIT

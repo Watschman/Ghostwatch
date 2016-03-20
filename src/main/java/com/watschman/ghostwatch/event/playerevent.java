@@ -29,8 +29,8 @@ public class playerevent {
                     event.player.capabilities.allowFlying = true;
                     event.player.capabilities.disableDamage = true;
                 }
-
-            } else {
+            }
+            else {
                 event.player.setGameType(WorldSettings.GameType.SURVIVAL);
                 event.player.capabilities.allowEdit = true;
                 event.player.capabilities.isCreativeMode = false;
