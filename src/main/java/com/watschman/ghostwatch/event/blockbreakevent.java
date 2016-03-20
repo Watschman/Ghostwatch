@@ -7,11 +7,14 @@ import net.minecraftforge.event.world.BlockEvent;
 public class blockbreakevent {
 
     @SubscribeEvent
-    public void onBlockBreakEvent(BlockEvent.BreakEvent event){
-        if (!(configReference.whitelist.contains(event.getPlayer().getDisplayName()))){
-            event.setCanceled(true);
+    public void pre(BlockEvent.BreakEvent event) {
+        if (configReference.configValue == true) {
+            if (!(configReference.whitelist.contains(event.getPlayer().getDisplayName()))) {
+                event.setCanceled(true);
+            }
+        }
+        else {
+            //NOOP
         }
     }
-
-
 }

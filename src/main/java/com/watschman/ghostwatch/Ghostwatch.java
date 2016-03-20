@@ -1,9 +1,10 @@
 package com.watschman.ghostwatch;
 
-import com.watschman.ghostwatch.event.playerevent;
+import com.watschman.ghostwatch.event.*;
 import com.watschman.ghostwatch.handler.ConfigurationHandler;
 import com.watschman.ghostwatch.proxy.IProxy;
 import com.watschman.ghostwatch.reference.Reference;
+import com.watschman.ghostwatch.reference.configReference;
 import com.watschman.ghostwatch.server.commands.SampleCommand;
 import com.watschman.ghostwatch.utility.LogHelper;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -13,6 +14,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.common.MinecraftForge;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION, guiFactory = Reference.GUI_FACTORY_CLASS, acceptableRemoteVersions = "*")
 
@@ -30,7 +32,7 @@ public class Ghostwatch
     public void preinit(FMLPreInitializationEvent event) //hier Items Entities etc.
     {
         ConfigurationHandler.init(event.getSuggestedConfigurationFile());
-        FMLCommonHandler.instance().bus().register(new ConfigurationHandler());
+        FMLCommonHandler.instance().bus().register(ConfigurationHandler.INSTANCE);
         LogHelper.info("Pre Init done");
     }
 
@@ -38,7 +40,13 @@ public class Ghostwatch
     @Mod.EventHandler
     public void init(FMLInitializationEvent event)
     {
-        FMLCommonHandler.instance().bus().register(new playerevent());
+        if (configReference.configValue == true) {
+            FMLCommonHandler.instance().bus().register(new playerevent());
+            MinecraftForge.EVENT_BUS.register(new attackentityevent());
+            MinecraftForge.EVENT_BUS.register(new blockbreakevent());
+            MinecraftForge.EVENT_BUS.register(new blockplaceevent());
+            MinecraftForge.EVENT_BUS.register(new containerinteractevent());
+        }
         LogHelper.info("Init done");
     }
 

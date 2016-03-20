@@ -7,10 +7,14 @@ import net.minecraftforge.event.entity.player.AttackEntityEvent;
 public class attackentityevent{
 
     @SubscribeEvent
-    public void onAttackEntityEvent(AttackEntityEvent event) {
-        if (!(configReference.whitelist.contains(event.entityPlayer.getDisplayName()))){
-            event.setCanceled(true);
+    public void pre(AttackEntityEvent event) {
+        if (configReference.configValue == true) {
+            if (!(configReference.whitelist.contains(event.entityPlayer.getDisplayName()))) {
+                event.setCanceled(true);
+            }
+        }
+        else {
+            //NOOP
         }
     }
-
 }

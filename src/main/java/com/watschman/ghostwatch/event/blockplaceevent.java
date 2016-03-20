@@ -6,9 +6,14 @@ import net.minecraftforge.event.world.BlockEvent;
 
 public class blockplaceevent {
     @SubscribeEvent
-    public void onBlockPlacerEvent(BlockEvent.PlaceEvent event){
-        if (!(configReference.whitelist.contains(event.player.getDisplayName()))) {
-            event.setCanceled(true);
+    public void pre(BlockEvent.PlaceEvent event) {
+        if (configReference.configValue == true) {
+            if (!(configReference.whitelist.contains(event.player.getDisplayName()))) {
+                event.setCanceled(true);
+            }
+        }
+        else {
+            //NOOP
         }
     }
 }

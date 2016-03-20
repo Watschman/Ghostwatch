@@ -7,9 +7,10 @@ import net.minecraftforge.event.entity.player.PlayerOpenContainerEvent;
 
 public class containerinteractevent {
     @SubscribeEvent
-    public void onPlayerOpenContainerEvent(PlayerOpenContainerEvent event){
-        if (!(configReference.whitelist.contains(event.entityPlayer.getDisplayName()))){
-            event.setResult(Event.Result.DENY);
+    public void pre(PlayerOpenContainerEvent event) {
+        if (configReference.configValue == true) {
+            if (!(configReference.whitelist.contains(event.entityPlayer.getDisplayName()))) {
+                event.setResult(Event.Result.DENY);
 
 //            get UI working
 
@@ -17,9 +18,12 @@ public class containerinteractevent {
 //            if (event.entityPlayer.openGui() = GuiIngameMenu){
 //                event.setResult(Event.Result.ALLOW);
 //            }
+            } else {
+                event.setResult(Event.Result.DEFAULT);
+            }
         }
         else {
-            event.setResult(Event.Result.DEFAULT);
+            //NOOP
         }
     }
 }

@@ -1,5 +1,7 @@
 package com.watschman.ghostwatch.server.commands;
 
+import com.watschman.ghostwatch.handler.ConfigurationHandler;
+import com.watschman.ghostwatch.reference.configReference;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.ChatComponentText;
@@ -34,8 +36,14 @@ public class SampleCommand implements ICommand{
     public void processCommand(ICommandSender icommandsender, String[] argstring)
     {
         if (argstring.length == 0){
-            icommandsender.addChatMessage(new ChatComponentText("Invalid Argument"));
-            return;
+            if (configReference.configValue == false){
+                icommandsender.addChatMessage(new ChatComponentText("configValue is currently false"));
+                return;
+            }
+            else{
+                icommandsender.addChatMessage(new ChatComponentText("configValue is currently true"));
+                return;
+            }
         }
         icommandsender.addChatMessage(new ChatComponentText(argstring[0]));
     }

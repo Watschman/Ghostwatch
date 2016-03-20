@@ -12,12 +12,22 @@ import java.util.Arrays;
 
 public class ConfigurationHandler{
 
+    public static final ConfigurationHandler INSTANCE = new ConfigurationHandler();
     public static Configuration configuration;
 
     public static void init(File configFile){
         if (configuration == null){
             configuration = new Configuration(configFile);
-            loadConfiguration();
+            INSTANCE.loadConfiguration();
+        }
+    }
+    private static void loadConfiguration(){
+        configReference.configValue = configuration.getBoolean("enabled", Configuration.CATEGORY_GENERAL, false, "defines if this Mod is enabled or not");
+        Property whitelist = configuration.get(Configuration.CATEGORY_GENERAL, "whitelist", new String[]{"watschman"});
+        whitelist.comment = "Add player names to permit building in Survival";
+        configReference.whitelist.addAll(Arrays.asList(whitelist.getStringList()));
+        if (configuration.hasChanged()){
+            configuration.save();
         }
     }
     @SubscribeEvent
@@ -25,15 +35,6 @@ public class ConfigurationHandler{
         if (event.modID.equalsIgnoreCase(Reference.MOD_ID)){
             //RESYNC
             loadConfiguration();
-        }
-    }
-    private static void loadConfiguration(){
-        configReference.configValue = configuration.getBoolean("enabled", Configuration.CATEGORY_GENERAL, true, "defines if this Mod is enabled or not");
-        Property whitelist = configuration.get(Configuration.CATEGORY_GENERAL, "whitelist", new String[]{"watschman"});
-        whitelist.comment = "Add player names to permit building in Survival";
-        configReference.whitelist.addAll(Arrays.asList(whitelist.getStringList()));
-        if (configuration.hasChanged()){
-            configuration.save();
         }
     }
 }
