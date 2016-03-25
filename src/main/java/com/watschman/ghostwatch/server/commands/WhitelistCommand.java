@@ -2,7 +2,6 @@ package com.watschman.ghostwatch.server.commands;
 
 import com.watschman.ghostwatch.handler.ConfigurationHandler;
 import com.watschman.ghostwatch.reference.configReference;
-import com.watschman.ghostwatch.utility.LogHelper;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -56,7 +55,7 @@ public class WhitelistCommand implements ICommand{
                 icommandsender.addChatMessage(new ChatComponentText(argstring[1] + " was successfully added to the whitelist."));
                 ConfigurationHandler.loadConfiguration();
             }
-            if (configReference.configValue == true) {
+            if (configReference.configValue) {
                 if (minecraftServer.getConfigurationManager().playerEntityList.contains(entityPlayerMP)) {
                     if (configReference.whitelist.contains(entityPlayerMP.getDisplayName())) {
                         int i = 0;
@@ -87,10 +86,8 @@ public class WhitelistCommand implements ICommand{
                         entityPlayerMP.removePotionEffect(Potion.invisibility.id);
                     }
                 }
+                entityPlayerMP.sendPlayerAbilities();
             }
-        }
-        else{
-            //NOOP
         }
         if (argstring[0].equals("remove")) {
             EntityPlayerMP entityPlayerMP = MinecraftServer.getServer().getConfigurationManager().func_152612_a(argstring[1]);
@@ -98,7 +95,8 @@ public class WhitelistCommand implements ICommand{
                 configReference.whitelist.remove(argstring[1]);
                 icommandsender.addChatMessage(new ChatComponentText(argstring[1] + " was successfully removed from the whitelist."));
                 ConfigurationHandler.loadConfiguration();
-            } else {
+            }
+            else {
                 icommandsender.addChatMessage(new ChatComponentText(argstring[1] + " could not be deleted."));
             }
             if (configReference.configValue == true) {
@@ -112,36 +110,13 @@ public class WhitelistCommand implements ICommand{
                         }
                         if (entityPlayerMP.capabilities.allowEdit != false || entityPlayerMP.capabilities.isCreativeMode != false || entityPlayerMP.capabilities.allowFlying != true || entityPlayerMP.capabilities.disableDamage != true) {
                             entityPlayerMP.capabilities.allowEdit = false;
-                            entityPlayerMP.capabilities.isCreativeMode = false;
                             entityPlayerMP.capabilities.allowFlying = true;
+                            entityPlayerMP.capabilities.isCreativeMode = false;
                             entityPlayerMP.capabilities.disableDamage = true;
                         }
                     }
                 }
-            }
-        }
-        else{
-            //NOOP
-        }
-        if (argstring[0].equals("on")) {
-            if (configReference.configValue == true) {
-                icommandsender.addChatMessage(new ChatComponentText("The whitelist is already enabled."));
-            }
-            else{
-                configReference.configValue = true;
-                ConfigurationHandler.loadConfiguration();
-                icommandsender.addChatMessage(new ChatComponentText("The whitelist was successfully enabled."));
-                icommandsender.addChatMessage(new ChatComponentText("If you wish to add somebody to the whitelist please use /ghostwatch add [name]."));
-            }
-        }
-        if (argstring[0].equals("off")) {
-            if (configReference.configValue == false) {
-                icommandsender.addChatMessage(new ChatComponentText("The whitelist is already turned off."));
-            }
-            else{
-                configReference.configValue = false;
-                ConfigurationHandler.loadConfiguration();
-                icommandsender.addChatMessage(new ChatComponentText("The whitelist was successfully turned off."));
+                entityPlayerMP.sendPlayerAbilities();
             }
         }
     }

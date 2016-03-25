@@ -36,6 +36,7 @@ public class playerevent {
                 event.player.capabilities.isCreativeMode = false;
                 event.player.capabilities.allowFlying = false;
                 event.player.capabilities.disableDamage = false;
+                event.player.removePotionEffect(Potion.invisibility.id);
                 LogHelper.info(event.player.getDisplayName() + " is whitelistet and logged in");
 
             }

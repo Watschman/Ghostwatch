@@ -16,7 +16,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.common.MinecraftForge;
 
-@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION, guiFactory = Reference.GUI_FACTORY_CLASS, acceptableRemoteVersions = "*")
+@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION, acceptableRemoteVersions = "*")
 
 public class Ghostwatch
 {
@@ -40,7 +40,7 @@ public class Ghostwatch
     @Mod.EventHandler
     public void init(FMLInitializationEvent event)
     {
-        if (configReference.configValue == true) {
+        if (configReference.configValue) {
             FMLCommonHandler.instance().bus().register(new playerevent());
             MinecraftForge.EVENT_BUS.register(new attackentityevent());
             MinecraftForge.EVENT_BUS.register(new blockbreakevent());
