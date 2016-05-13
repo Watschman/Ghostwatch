@@ -16,7 +16,7 @@ public class playerevent {
         if (configReference.configValue == true) {
             if (!(configReference.whitelist.contains(event.player.getDisplayName()))) {
 
-                LogHelper.info(event.player.getDisplayName() + " is not whitelistet and logged in");
+                LogHelper.info(event.player.getDisplayName() + " is not whitelistet and logged in!");
                 event.player.addPotionEffect(new PotionEffect(Potion.invisibility.id, 1728000, 1));
                 int i = 0;
                 WorldSettings.getGameTypeById(i);
@@ -37,7 +37,7 @@ public class playerevent {
                 event.player.capabilities.allowFlying = false;
                 event.player.capabilities.disableDamage = false;
                 event.player.removePotionEffect(Potion.invisibility.id);
-                LogHelper.info(event.player.getDisplayName() + " is whitelistet and logged in");
+                LogHelper.info(event.player.getDisplayName() + " is whitelistet and logged in!");
 
             }
         }
@@ -74,7 +74,7 @@ public class playerevent {
     public void onPlayerLogout(PlayerEvent.PlayerLoggedOutEvent event) {
         if (configReference.configValue == true) {
             if (!(configReference.whitelist.contains(event.player.getDisplayName()))) {
-                LogHelper.info(event.player.getDisplayName() + " ist not whitelistet and logged aus");
+                LogHelper.info(event.player.getDisplayName() + " is not whitelistet and logged out!");
             }
         }
         else {
